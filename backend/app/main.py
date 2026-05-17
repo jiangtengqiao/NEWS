@@ -1,15 +1,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, users, friends, messages, email, news as news_api, advanced
+from app.api.orders import router as orders_router
+from app.api.social import router as social_router, msg_router as messages_router
 from app.core.database import engine, Base, SessionLocal
 from app.models import user, friendship, message, email_verification, news as news_models, advanced as advanced_models
+from app.models import user_extended
 from app.schemas.news import NewsCreate, CategoryCreate
 from app.services.news_service import NewsService
+from app.services.news_spider import initialize_news_spider
 
 # 创建数据库表
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Customize-News API")
+app = FastAPI(title="桂林临桂资讯平台 API", version="1.0.0", description="桂林市临桂区官方新闻资讯平台")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,6 +30,9 @@ app.include_router(messages.router)
 app.include_router(email.router)
 app.include_router(news_api.router)
 app.include_router(advanced.router)
+app.include_router(orders_router)
+app.include_router(social_router)
+app.include_router(messages_router)
 
 
 def init_sample_data():
