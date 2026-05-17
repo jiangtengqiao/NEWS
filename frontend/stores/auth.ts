@@ -3,17 +3,24 @@ import { ref, computed } from 'vue'
 import type { User, Token } from '~/types'
 
 export const useAuthStore = defineStore('auth', () => {
-  const token = ref<string | null>(
-    import.meta.client ? localStorage.getItem('token') : null
-  )
+  const token = ref<string | null>(null)
   const user = ref<User | null>(null)
   const loading = ref(false)
 
   const isAuthenticated = computed(() => !!token.value)
 
+  function initializeAuth() {
+    if (import.meta.client && typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem('token')
+      if (storedToken) {
+        token.value = storedToken
+      }
+    }
+  }
+
   function setToken(newToken: string) {
     token.value = newToken
-    if (import.meta.client) {
+    if (import.meta.client && typeof window !== 'undefined') {
       localStorage.setItem('token', newToken)
     }
   }
@@ -25,7 +32,7 @@ export const useAuthStore = defineStore('auth', () => {
   function logout() {
     token.value = null
     user.value = null
-    if (import.meta.client) {
+    if (import.meta.client && typeof window !== 'undefined') {
       localStorage.removeItem('token')
     }
   }
@@ -39,6 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     loading,
     isAuthenticated,
+    initializeAuth,
     setToken,
     setUser,
     logout,

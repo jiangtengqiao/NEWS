@@ -2,11 +2,9 @@ import type { LoginRequest, RegisterRequest, Token, User } from '~/types'
 
 export function useAuth() {
   const authStore = useAuthStore()
-  const config = useRuntimeConfig()
-  const toast = useToast()
 
   const apiFetch = $fetch.create({
-    baseURL: config.public.apiBase,
+    baseURL: 'http://localhost:8000',
     onRequest({ options }) {
       if (authStore.token) {
         options.headers = {
@@ -16,6 +14,14 @@ export function useAuth() {
       }
     }
   })
+
+  function getToast() {
+    return useToast()
+  }
+
+  function getConfig() {
+    return useRuntimeConfig()
+  }
 
   async function login(credentials: LoginRequest): Promise<void> {
     try {
@@ -27,12 +33,12 @@ export function useAuth() {
       
       authStore.setToken(response.access_token)
       await fetchCurrentUser()
-      toast.add({
+      getToast().add({
         title: '欢迎回来！',
         color: 'green'
       })
     } catch (error) {
-      toast.add({
+      getToast().add({
         title: '登录失败',
         description: '请检查您的邮箱和密码',
         color: 'red'
@@ -51,13 +57,13 @@ export function useAuth() {
         body: data
       })
       
-      toast.add({
+      getToast().add({
         title: '注册成功！',
         description: '请登录您的账户',
         color: 'green'
       })
     } catch (error) {
-      toast.add({
+      getToast().add({
         title: '注册失败',
         description: '请检查您的信息',
         color: 'red'
@@ -87,7 +93,7 @@ export function useAuth() {
 
   function handleLogout() {
     authStore.logout()
-    toast.add({
+    getToast().add({
       title: '已退出登录',
       color: 'blue'
     })
