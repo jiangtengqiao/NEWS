@@ -45,6 +45,20 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 class AuthService:
     @staticmethod
+    def create_user(db: Session, user_data):
+        from app.schemas.user import UserCreate
+        hashed_password = get_password_hash(user_data.password)
+        db_user = User(
+            email=user_data.email,
+            password_hash=hashed_password,
+            nickname=user_data.nickname
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+
+    @staticmethod
     def authenticate_user(db: Session, email: str, password: str) -> Optional[User]:
         user = db.query(User).filter(User.email == email).first()
         if not user:

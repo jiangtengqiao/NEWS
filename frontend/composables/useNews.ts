@@ -9,7 +9,7 @@ export function useNews() {
     async function fetchNews(skip = 0, limit = 20, category?: string, search?: string) {
         newsStore.setLoading(true)
         try {
-            let url = `/api/news?skip=${skip}&limit=${limit}`
+            let url = `/api/news/?skip=${skip}&limit=${limit}`
             if (category) {
                 url += `&category=${category}`
             }
