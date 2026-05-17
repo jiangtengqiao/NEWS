@@ -1,12 +1,9 @@
-from app.models.user import User, UserCode
-from app.models.friendship import Friendship
-from app.models.message import Message
-from app.models.email_verification import EmailVerification, CookieConsent
-from app.models.news import Category, News, NewsFavorite, NewsRead, NewsComment, UserPreference
-from app.models.advanced import Notification, UserSetting, UserActivityStat
+from app.models.user import User
+from app.models.user_extended import UserCode, Friendship, Message, EmailVerification, Order, UserActivityStat
+from app.models.news import Category, News, NewsFavorite, NewsRead, NewsComment
 
 __all__ = [
-    "User", "UserCode", "Friendship", "Message", "EmailVerification", "CookieConsent",
-    "Category", "News", "NewsFavorite", "NewsRead", "NewsComment", "UserPreference",
-    "Notification", "UserSetting", "UserActivityStat"
+    "User", "UserCode", "Friendship", "Message", "EmailVerification",
+    "Category", "News", "NewsFavorite", "NewsRead", "NewsComment",
+    "Order", "UserActivityStat"
 ]
