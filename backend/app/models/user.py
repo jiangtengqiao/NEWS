@@ -61,6 +61,17 @@ class User(Base):
     sent_messages = relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
     received_messages = relationship("Message", foreign_keys="Message.receiver_id", back_populates="receiver", cascade="all, delete-orphan")
     cookie_consents = relationship("CookieConsent", back_populates="user", cascade="all, delete-orphan")
+    
+    # 新闻相关
+    favorites = relationship("NewsFavorite", back_populates="user", cascade="all, delete-orphan")
+    news_reads = relationship("NewsRead", back_populates="user", cascade="all, delete-orphan")
+    comments = relationship("NewsComment", back_populates="user", cascade="all, delete-orphan")
+    preferences = relationship("UserPreference", back_populates="user", cascade="all, delete-orphan")
+    
+    # 高级功能
+    notifications = relationship("Notification", back_populates="user", cascade="all, delete-orphan")
+    settings = relationship("UserSetting", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    activity_stats = relationship("UserActivityStat", back_populates="user", cascade="all, delete-orphan")
 
 
 class UserCode(Base):

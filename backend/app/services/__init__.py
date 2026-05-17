@@ -6,6 +6,8 @@ from app.services.auth_service import (
 )
 from app.services.user_service import UserService
 from app.services.email_service import EmailService
+from app.services.news_service import NewsService
+from app.services.advanced_service import NotificationService, UserSettingService, StatsService
 
 __all__ = [
     "cache_service",
@@ -14,5 +16,9 @@ __all__ = [
     "get_current_active_user",
     "AuthService",
     "UserService",
-    "EmailService"
+    "EmailService",
+    "NewsService",
+    "NotificationService",
+    "UserSettingService",
+    "StatsService"
 ]
