@@ -1,23 +1,21 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-
-interface User {
-  id: string
-  email: string
-  nickname?: string
-  is_verified: boolean
-  is_subscribed: boolean
-}
+import type { User, Token } from '~/types'
 
 export const useAuthStore = defineStore('auth', () => {
-  const token = ref<string | null>(localStorage.getItem('token'))
+  const token = ref<string | null>(
+    import.meta.client ? localStorage.getItem('token') : null
+  )
   const user = ref<User | null>(null)
+  const loading = ref(false)
 
   const isAuthenticated = computed(() => !!token.value)
 
   function setToken(newToken: string) {
     token.value = newToken
-    localStorage.setItem('token', newToken)
+    if (import.meta.client) {
+      localStorage.setItem('token', newToken)
+    }
   }
 
   function setUser(newUser: User) {
@@ -27,15 +25,23 @@ export const useAuthStore = defineStore('auth', () => {
   function logout() {
     token.value = null
     user.value = null
-    localStorage.removeItem('token')
+    if (import.meta.client) {
+      localStorage.removeItem('token')
+    }
+  }
+
+  function setLoading(newLoading: boolean) {
+    loading.value = newLoading
   }
 
   return {
     token,
     user,
+    loading,
     isAuthenticated,
     setToken,
     setUser,
-    logout
+    logout,
+    setLoading
   }
 })
