@@ -1,14 +1,14 @@
 import uuid
 from sqlalchemy import Column, String, DateTime, func, ForeignKey, Boolean
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.core.database import Base
+from app.models.user import GUID
 
 
 class EmailVerification(Base):
     __tablename__ = "email_verifications"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), nullable=False)
     code = Column(String(6), nullable=False)
     type = Column(String(20), nullable=False)
@@ -19,8 +19,8 @@ class EmailVerification(Base):
 class CookieConsent(Base):
     __tablename__ = "cookie_consents"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    user_id = Column(GUID(), ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
     session_id = Column(String(100))
     necessary = Column(Boolean, default=True)
     analytics = Column(Boolean, default=False)

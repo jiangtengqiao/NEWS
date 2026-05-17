@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, users, friends, messages, email
+from app.core.database import engine, Base
+from app.models import user, friendship, message, email_verification
+
+# 创建数据库表
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Customize-News API")
 
