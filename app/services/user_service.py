@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, UploadFile
 from uuid import UUID
 
-from app.models.user import User, UserCode
+from app.models.user import User
+from app.models.user_extended import UserCode
 from app.schemas.user import UserCreate, UserUpdate
 from app.core.security import get_password_hash
 
