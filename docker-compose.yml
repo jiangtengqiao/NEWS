@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: customize_news
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: customize_news
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://customize_news:password@db:5432/customize_news
+      SECRET_KEY: your-secret-key-here
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
