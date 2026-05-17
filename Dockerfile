@@ -17,15 +17,17 @@ WORKDIR /app
 
 # Install Python dependencies
 COPY backend/requirements.txt ./backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt --break-system-packages
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy backend code
 COPY backend ./backend/
 
-# Copy built frontend
-COPY --from=builder /app/frontend/dist ./backend/frontend_dist/
+# Copy built frontend (Nuxt outputs to .output/public)
+COPY --from=builder /app/frontend/.output/public ./backend/frontend_dist/
 
 EXPOSE 8000
+
+ENV PYTHONUNBUFFERED=1
 
 CMD cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000
 
