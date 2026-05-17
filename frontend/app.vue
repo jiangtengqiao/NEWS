@@ -6,11 +6,13 @@
 </template>
 
 <script setup lang="ts">
-const { fetchCurrentUser, isAuthenticated } = useAuth()
-
-onMounted(() => {
-  if (isAuthenticated.value) {
-    fetchCurrentUser()
+onMounted(async () => {
+  if (import.meta.client) {
+    const authStore = useAuthStore()
+    if (authStore.token) {
+      const { fetchCurrentUser } = useAuth()
+      await fetchCurrentUser()
+    }
   }
 })
 </script>
