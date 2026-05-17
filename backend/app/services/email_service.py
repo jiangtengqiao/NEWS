@@ -11,7 +11,7 @@ class EmailService:
     """使用Resend API发送真实邮件"""
     
     RESEND_API_KEY = os.getenv('RESEND_API_KEY', 're_placeholder_key')
-    FROM_EMAIL = "临桂资讯 <noreply@lingui.cn>"
+    FROM_EMAIL = "临桂资讯 <onboarding@resend.dev>"
     
     # 邮件模板
     VERIFICATION_EMAIL_TEMPLATE = """
