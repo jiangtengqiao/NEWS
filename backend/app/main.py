@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+from pathlib import Path
 from app.api import auth, users, friends, messages, email, news as news_api, advanced
 from app.api.orders import router as orders_router
 from app.api.social import router as social_router, msg_router as messages_router
@@ -109,3 +113,17 @@ async def root():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+# 提供前端静态文件
+frontend_dist = Path(__file__).parent.parent / "frontend_dist"
+if frontend_dist.exists():
+    app.mount("/_nuxt", StaticFiles(directory=str(frontend_dist / "_nuxt")), name="nuxt_static")
+    
+    @app.get("/{path:path}")
+    async def serve_frontend(path: str):
+        if path == "" or path == "/":
+            path = "index.html"
+        file_path = frontend_dist / path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(str(file_path))
+        return FileResponse(str(frontend_dist / "index.html"))
