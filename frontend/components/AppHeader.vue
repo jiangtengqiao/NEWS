@@ -115,7 +115,7 @@ const handleLogout = () => {
 }
 
 onMounted(async () => {
-  if (isAuthenticated.value) {
+  if (import.meta.client && isAuthenticated.value) {
     try {
       await fetchNotifications()
     } catch (error) {

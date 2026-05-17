@@ -1,9 +1,15 @@
 import { defineStore } from 'pinia'
 import type { Notification } from '~/types'
 
+interface NotificationState {
+    notifications: Notification[]
+    loading: boolean
+    unreadCount: number
+}
+
 export const useNotificationStore = defineStore('notification', {
-    state: () => ({
-        notifications: [] as Notification[],
+    state: (): NotificationState => ({
+        notifications: [],
         loading: false,
         unreadCount: 0
     }),

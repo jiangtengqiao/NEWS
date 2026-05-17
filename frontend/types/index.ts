@@ -113,7 +113,32 @@ export interface Notification {
     title: string
     content?: string
     relatedId?: string
-    isRead: boolean
+    relatedType?: string
+    read: boolean
+    readAt?: string
+    createdAt: string
+}
+
+export interface UserSetting {
+    id: string
+    userId: string
+    notificationLike: boolean
+    notificationComment: boolean
+    notificationFavorite: boolean
+    notificationFollow: boolean
+    notificationSystem: boolean
+    createdAt: string
+    updatedAt: string
+}
+
+export interface UserActivityStat {
+    id: string
+    userId: string
+    newsRead: number
+    newsLiked: number
+    newsFavorited: number
+    commentsPosted: number
+    date: string
     createdAt: string
 }
 

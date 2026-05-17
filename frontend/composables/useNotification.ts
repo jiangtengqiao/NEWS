@@ -1,13 +1,14 @@
 import { useNotificationStore } from '~/stores/notification'
+import { useAuth } from '~/composables/useAuth'
 
 export function useNotification() {
     const notificationStore = useNotificationStore()
-    const { $api } = useNuxtApp()
+    const { apiFetch } = useAuth()
 
     async function fetchNotifications() {
         try {
             notificationStore.setLoading(true)
-            const response = await $api('/notifications')
+            const response = await apiFetch<{ notifications: any[] }>('/api/notifications')
             notificationStore.setNotifications(response.notifications)
             return response.notifications
         } catch (error) {
@@ -20,7 +21,7 @@ export function useNotification() {
 
     async function markAsRead(notificationId: string) {
         try {
-            await $api(`/notifications/${notificationId}/read`, {
+            await apiFetch(`/api/notifications/${notificationId}/read`, {
                 method: 'POST'
             })
             notificationStore.markAsRead(notificationId)
@@ -32,7 +33,7 @@ export function useNotification() {
 
     async function markAllAsRead() {
         try {
-            await $api('/notifications/read-all', {
+            await apiFetch('/api/notifications/read-all', {
                 method: 'POST'
             })
             notificationStore.markAllAsRead()
@@ -44,7 +45,7 @@ export function useNotification() {
 
     async function deleteNotification(notificationId: string) {
         try {
-            await $api(`/notifications/${notificationId}`, {
+            await apiFetch(`/api/notifications/${notificationId}`, {
                 method: 'DELETE'
             })
             notificationStore.removeNotification(notificationId)

@@ -1,13 +1,14 @@
 import { useSettingsStore } from '~/stores/settings'
+import { useAuth } from '~/composables/useAuth'
 
 export function useSettings() {
     const settingsStore = useSettingsStore()
-    const { $api } = useNuxtApp()
+    const { apiFetch } = useAuth()
 
     async function fetchSettings() {
         try {
             settingsStore.setLoading(true)
-            const response = await $api('/settings')
+            const response = await apiFetch<{ settings: any }>('/api/settings')
             settingsStore.setSettings(response.settings)
             return response.settings
         } catch (error) {
@@ -20,7 +21,7 @@ export function useSettings() {
 
     async function updateSettings(updates: Partial<any>) {
         try {
-            const response = await $api('/settings', {
+            const response = await apiFetch<{ settings: any }>('/api/settings', {
                 method: 'PUT',
                 body: updates
             })
