@@ -2,10 +2,10 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-4xl font-bold text-center text-gray-900 mb-8">
-        📰 临桂资讯平台
+        📰 Customize News
       </h1>
       <p class="text-center text-gray-600 mb-12">
-        桂林市临桂区官方新闻资讯平台
+        您的个性化新闻平台
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -187,10 +187,7 @@
       </div>
 
       <div class="mt-12 text-center text-gray-500 text-sm">
-        <p>© 2026 桂林市临桂区融媒体中心</p>
-        <p class="mt-2">
-          <strong>联系方式：</strong>service@lingui.cn | 0773-558XXXX
-        </p>
+        <p>© 2026 Customize News. All rights reserved.</p>
       </div>
     </div>
   </div>
@@ -198,6 +195,6 @@
 
 <script setup lang="ts">
 useHead({
-  title: '临桂资讯 - 桂林市临桂区官方新闻资讯平台'
+  title: 'Customize News - 您的个性化新闻平台'
 })
 </script>

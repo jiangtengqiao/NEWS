@@ -17,7 +17,7 @@ from app.services.news_spider import initialize_news_spider
 # 创建数据库表
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="桂林临桂资讯平台 API", version="1.0.0", description="桂林市临桂区官方新闻资讯平台")
+app = FastAPI(title="Customize News API", version="1.0.0", description="您的个性化新闻平台")
 
 app.add_middleware(
     CORSMiddleware,

@@ -11,7 +11,7 @@ class EmailService:
     """使用Resend API发送真实邮件"""
     
     RESEND_API_KEY = os.getenv('RESEND_API_KEY', 're_placeholder_key')
-    FROM_EMAIL = "临桂资讯 <onboarding@resend.dev>"
+    FROM_EMAIL = "Customize News <onboarding@resend.dev>"
     
     # 邮件模板
     VERIFICATION_EMAIL_TEMPLATE = """
@@ -20,7 +20,7 @@ class EmailService:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>临桂资讯 - 邮箱验证</title>
+    <title>Customize News - 邮箱验证</title>
     <style>
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -150,14 +150,14 @@ class EmailService:
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">📰 临桂资讯</div>
-            <div class="subtitle">桂林市临桂区官方新闻资讯平台</div>
+            <div class="logo">📰 Customize News</div>
+            <div class="subtitle">您的个性化新闻平台</div>
         </div>
         
         <div class="content">
             <h3>尊敬的 用户，您好！</h3>
             
-            <p>感谢您注册成为临桂资讯平台的用户！我们很高兴您选择使用我们的服务来获取最新、最权威的新闻资讯。</p>
+            <p>感谢您注册成为 Customize News 的用户！我们很高兴您选择使用我们的服务来获取最新、最个性化的新闻资讯。</p>
             
             <div class="code-box">
                 <div class="code">{verification_code}</div>
@@ -170,19 +170,19 @@ class EmailService:
                 <div class="warning-title">⚠️ 安全提醒</div>
                 <p style="margin: 0; font-size: 13px;">
                     • 请勿将验证码透露给他人<br>
-                    • 临桂资讯工作人员不会索要您的验证码<br>
+                    • Customize News 工作人员不会索要您的验证码<br>
                     • 若您未进行注册操作，请忽略此邮件
                 </p>
             </div>
             
-            <h3>📌 临桂资讯平台简介</h3>
+            <h3>📌 Customize News 简介</h3>
             
-            <p><strong>临桂资讯</strong>是由桂林市临桂区融媒体中心运营的官方新闻资讯平台，致力于为桂林市临桂区乃至桂林市全体居民提供权威、及时、全面的新闻资讯服务。</p>
+            <p><strong>Customize News</strong>是一个现代化的新闻资讯平台，致力于为您提供个性化、高质量的新闻阅读体验。</p>
             
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">📰</div>
-                    <div class="feature-name">权威新闻</div>
+                    <div class="feature-name">精选新闻</div>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🎧</div>
@@ -193,53 +193,31 @@ class EmailService:
                     <div class="feature-name">多语言</div>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">💰</div>
-                    <div class="feature-name">订阅服务</div>
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-name">好友聊天</div>
                 </div>
             </div>
             
             <h3>📋 我们的服务</h3>
             
-            <p>临桂资讯平台提供以下核心服务：</p>
+            <p>Customize News 提供以下核心服务：</p>
             
-            <p><strong>1. 国家时政新闻（免费）</strong><br>
-            包括国家领导人活动、中央政策文件、重要会议报道等，全部免费提供。</p>
+            <p><strong>1. 新闻浏览</strong><br>
+            包括时政、财经、科技、文化、体育等各类新闻内容。</p>
             
-            <p><strong>2. 桂林地方新闻（免费）</strong><br>
-            包括桂林市及临桂区新闻、部门公告、政务服务信息等，全部免费提供。</p>
+            <p><strong>2. 好友系统</strong><br>
+            添加好友，分享您感兴趣的新闻，与好友互动。</p>
             
-            <p><strong>3. 订阅付费内容</strong><br>
-            包括社会热点、财经商业、科技教育、文化体育、名人演讲等精彩内容。</p>
+            <p><strong>3. 私信聊天</strong><br>
+            与好友一对一聊天，分享观点和想法。</p>
             
             <p><strong>4. 个性化推荐</strong><br>
-            采用智能推荐算法，根据您的阅读偏好为您推荐感兴趣的新闻。</p>
-            
-            <p><strong>5. 语言转译服务</strong><br>
-            支持中文、英文、粤语、广西壮话等多种语言切换。</p>
-            
-            <h3>📞 联系我们</h3>
-            
-            <p>如果您在使用过程中遇到任何问题，欢迎通过以下方式联系我们：</p>
-            
-            <p>
-                <strong>官方网站：</strong>http://www.lingui.cn<br>
-                <strong>客服邮箱：</strong>service@lingui.cn<br>
-                <strong>客服电话：</strong>0773-558XXXX（工作日9:00-18:00）<br>
-                <strong>办公地址：</strong>广西壮族自治区桂林市临桂区致远路1号
-            </p>
-            
-            <h3>📜 法律声明</h3>
-            
-            <p>使用本平台服务前，请您仔细阅读：</p>
-            <p>• 《<a href="#">用户服务协议</a>》- 了解您的权利和义务<br>
-            • 《<a href="#">隐私政策</a>》- 了解我们如何保护您的个人信息<br>
-            • 《<a href="#">Cookie使用政策</a>》- 了解Cookie的使用说明</p>
+            根据您的阅读偏好为您推荐感兴趣的新闻。</p>
             
             <div class="warning">
                 <div class="warning-title">📋 重要提示</div>
                 <p style="margin: 0; font-size: 13px;">
-                    根据相关法律法规要求，订阅付费服务需要完成邮箱验证。
-                    验证后将享受平台全部功能，包括个性化推荐、高级搜索、语音播报等。
+                    完成邮箱验证后将享受平台全部功能，包括个性化推荐、好友系统、私信聊天等。
                 </p>
             </div>
             
@@ -249,9 +227,8 @@ class EmailService:
         </div>
         
         <div class="footer">
-            <p>此邮件由临桂资讯平台自动发送，请勿回复</p>
-            <p>© 2026 桂林市临桂区融媒体中心 保留所有权利</p>
-            <p>临桂资讯 - 桂林市临桂区官方新闻资讯平台</p>
+            <p>此邮件由 Customize News 自动发送，请勿回复</p>
+            <p>© 2026 Customize News. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -263,7 +240,7 @@ class EmailService:
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>临桂资讯 - 密码重置</title>
+    <title>Customize News - 密码重置</title>
     <style>
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -312,7 +289,7 @@ class EmailService:
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">📰 临桂资讯</div>
+            <div class="logo">📰 Customize News</div>
         </div>
         
         <h2>密码重置请求</h2>
@@ -332,16 +309,16 @@ class EmailService:
             <strong>⚠️ 安全提醒：</strong>
             <p style="margin: 5px 0 0 0; font-size: 13px;">
                 • 请勿将验证码透露给他人<br>
-                • 临桂资讯工作人员不会索要您的验证码
+                • Customize News 工作人员不会索要您的验证码
             </p>
         </div>
         
         <p>如果您需要帮助，请联系我们的客服团队。</p>
         
-        <p>此致<br>临桂资讯团队</p>
+        <p>此致<br>Customize News 团队</p>
         
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #999;">
-            <p>© 2026 桂林市临桂区融媒体中心</p>
+            <p>© 2026 Customize News. All rights reserved.</p>
         </div>
     </div>
 </body>

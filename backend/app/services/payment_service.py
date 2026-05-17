@@ -56,7 +56,7 @@ class PaymentService:
         order = Order(
             user_id=user_id,
             order_no=PaymentService.generate_order_no(),
-            subject=f"临桂资讯{price_info['name']}",
+            subject=f"Customize News {price_info['name']}",
             amount=amount,
             subscription_type=subscription_type,
             subscription_months=price_info['months']
