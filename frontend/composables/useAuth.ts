@@ -4,7 +4,7 @@ export function useAuth() {
   const authStore = useAuthStore()
 
   const apiFetch = $fetch.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: '',
     onRequest({ options }) {
       if (authStore.token) {
         options.headers = {

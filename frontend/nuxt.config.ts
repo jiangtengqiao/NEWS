@@ -20,11 +20,21 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:8000'
+      apiBase: process.env.API_BASE_URL || ''
     }
   },
 
-  devServer: {
-    port: 3000
+  vite: {
+    server: {
+      port: 3000,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8000',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path: string) => path
+        }
+      }
+    }
   }
 })
