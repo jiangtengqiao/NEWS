@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "cd frontend && npm install && npm run build && cp -r dist ../backend/frontend_dist",
-    "start": "cd backend && pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    "start": "cd backend && pip install -r requirements.txt --break-system-packages && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   }
 }
 
